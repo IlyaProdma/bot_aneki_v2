@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: $DBNAME
+      POSTGRES_USER: $DBUSER
+      POSTGRES_PASSWORD: $DBPASSWORD
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/config/config.conf:/var/lib/postgresql/data/postgresql.conf
+    ports:
+      - "15432:5432"
